@@ -1,0 +1,16 @@
+commit 225e4f520335ff4febbfa0c493883b0f783d03c9
+Author: Jorian <jorian@mail.ru>
+Date:   Thu Sep 23 14:40:47 2021 +0300
+
+    merge2 3
+
+diff --git a/0923/merge2.txt b/0923/merge2.txt
+index f9dc0cd..f6a24a0 100644
+--- a/0923/merge2.txt
++++ b/0923/merge2.txt
+@@ -1,3 +1,4 @@
+ ﻿Первая строчка.
+ Вторая строка.
++в мастере вставили строку сюда
+ Третья строчка.
+\ No newline at end of file

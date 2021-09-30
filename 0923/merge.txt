@@ -1,0 +1,4 @@
+﻿Some text for master.
+Another text for master.
+No more text for master.
+Some text for testmerge.
