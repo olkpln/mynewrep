@@ -1,0 +1,150 @@
+﻿@font-face {
+	font-family: 'Lobster';
+	src: url('Lobster-Regular.woff2') format('woff2');
+	font-weight: bold;
+	font-style: italic;
+}
+body {
+	font: normal 16px/24px 'Lobster';
+	margin: 0;
+    color: black;
+}
+.container {
+	margin: 0px auto;
+    background-image: linear-gradient(white 10%, yellow 70%);
+	position: relative;
+	padding: 10px;
+}
+
+p, h1, h4 {
+	background: linear-gradient(white, orange);
+	border-radius: 10px;
+	width: 280px;
+	padding: 10px;
+    text-align: justify;
+}
+h1, h4 {
+    text-align: center;
+}
+
+@media screen and (min-width: 640px) {
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 616px;
+		padding: 0;
+	}
+	p {
+		position: absolute;
+		margin: 0;
+    }
+	.first {
+		top: 50px;
+		left: 50px;
+	}
+	.second {
+		top: 50px;
+		right: 50px;
+	}
+	.third {
+		bottom:50px;
+		left:50px;
+	}
+    .fouth {
+		bottom:50px;
+		right:50px;
+	}
+}
+@keyframes hod1 {
+
+				0% {
+					transform: translate(0px, 0px);
+				}
+				25% {
+					transform: translateX(800px);
+				}
+				50% {
+					transform: translate(800px, 400px);
+				}
+				75% {
+					transform: translate(0px, 400px);
+				}
+                100% {
+					transform: translate(0px, 0px);
+				}
+			}
+@keyframes hod2 {
+
+				0% {
+					transform: translate(0px, 0px);
+				}
+				25% {
+					transform: translateY(400px);
+				}
+				50% {
+					transform: translate(-800px, 400px);
+				}
+				75% {
+					transform: translate(-800px, 0px);
+				}
+                100% {
+					transform: translate(0px, 0px);
+				}
+			}
+@keyframes hod3 {
+
+				0% {
+					transform: translate(0px, 0px);
+				}
+				25% {
+					transform: translateY(-400px);
+				}
+				50% {
+					transform: translate(800px, -400px);
+				}
+				75% {
+					transform: translate(800px, 0px);
+				}
+                100% {
+					transform: translate(0px, 0px);
+				}
+			}
+@keyframes hod4 {
+
+				0% {
+					transform: translate(0px, 0px);
+				}
+				25% {
+					transform: translateX(-800px);
+				}
+				50% {
+					transform: translate(-800px,-400px);
+				}
+				75% {
+					transform: translate(0px,-400px);
+				}
+                100% {
+					transform: translate(0px, 0px);
+				}
+			}
+@media screen and (min-width: 1200px) {
+	.container {
+		width: 1200px;
+		height: 640px;
+		padding: 0;
+	}
+            .fouth {
+            animation: hod4 7s linear infinite;
+            }
+			.third {
+			animation: hod3 7s infinite linear;
+            }
+			.second {
+			animation: hod2 7s linear infinite;
+            }
+			.first {
+			animation: hod1 7s linear infinite;}
+            }
+}
