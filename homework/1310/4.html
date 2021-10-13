@@ -1,0 +1,30 @@
+﻿﻿<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        
+        <title>Coords of square</title>
+        
+        <style>
+#elem {
+	margin-top: 200px;
+	margin-left: 600px;
+    width: 200px;
+    height: 200px;
+    background: pink;
+};
+        </style>
+<body>
+    <div id="elem"></div>
+    <script>
+	  let div = document.getElementById("elem");
+      div.addEventListener("click", function () {
+          let coords = elem.getBoundingClientRect();
+          console.log(`верхняя сторона ${coords.y};
+		  левая сторона ${coords.x};
+		  правая сторона ${coords.right};
+		  нижняя сторона ${coords.bottom}`);
+        });
+    </script>
+  </body>
+</html>
