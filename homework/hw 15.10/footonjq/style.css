@@ -1,0 +1,17 @@
+﻿#green {
+	margin: 0 auto;
+	height: 898px;
+	width: 898px;
+	border: 1px dashed black;
+	background: green;
+	position: relative;
+}
+#red {
+	height: 98px;
+	width: 98px;
+	border: 1px dashed black;
+	background: red;
+	position: absolute;
+	top: calc(50% - 50px);
+	left: calc(50% - 50px);
+}
