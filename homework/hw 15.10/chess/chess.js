@@ -1,70 +1,71 @@
-﻿$(function () {
-    $("td").click(whoIs);
-  });
-  
-  function whoIs(e) {
-    let hlpstr = "";
-    hlpstr += "This is " + e.target.id + ". ";
-    let hlpcls = e.target.classList;
-    if (!hlpcls.contains("white") && !hlpcls.contains("black")) {
-      hlpstr += "Empty here.";
-    } else {
-      if (hlpcls.contains("white")) {
-        hlpstr += "White ";
-      } else {
-        hlpstr += "Black ";
-      }
-      if (hlpcls.contains("king")) {
-        hlpstr += "king here.";
-      } else if (hlpcls.contains("queen")) {
-        hlpstr += "queen here.";
-      } else if (hlpcls.contains("rook")) {
-        hlpstr += "rook here.";
-      } else if (hlpcls.contains("bishop")) {
-        hlpstr += "bishop here.";
-      } else if (hlpcls.contains("knight")) {
-        hlpstr += "knight here.";
-      } else {
-        hlpstr += "pawn here.";
-      }
-    }
-    console.log(hlpstr);
+﻿$(function(){
+  $('td').click(markStep);
+});
+
+function whoIs(cell) {
+  let report = {
+      id: null,
+      content: null,
+      color: null,
   }
-  
-  $(function () {
-    $("td").click(markStep);
-  });
-
-  function markStep(e) { 
-    // По клику на клетке пометить ее классом stepfrom.
-  
-    $(this).toggleClass("stepfrom");
-
-    // Если на кликнутой клетке уже есть такой класс, просто убрать его.
-    if ($("td").not(this).hasClass("stepfrom")) {
-        $(this).removeClass("stepfrom");
-    }
-    // Если есть другая клетка с этим классом, пометить кликнутую клетку классом stepto.
-
-    if ($("td").not(this).hasClass("stepfrom")) {
-      $(this).toggleClass("stepto");
-    }
-    // Если на кликнутой клетке есть класс stepto, просто убрать его.
-    if ($("td").not(this).hasClass("stepto")) {
-        $(this).removeClass("stepto");
-    }
-    // Если на доске уже есть другая клетка с классом stepto, убрать классы stepfrom и stepto с ранее помеченных клеток, 
-    if ($("td").not(this).hasClass("stepto")) {
-        $(this).removeClass("stepto");
-        $(this).removeClass("stepfrom");
-        //кликнутую пометить классом stepfrom.
-        //$(this).toggleClass("stepfrom");
-    }
-      // Если после всех манипуляций на доске остались клетки с классами stepfrom и steptoб вывести в консоль объект вида {stepfrom: <cell id>, stepto: <cell id>}
-    if ($("td").hasClass("stepfrom") && $("td").hasClass("stepto")) {
-        let x;
-        x = $(".stepfrom").attr("id");
-        console.log("stepfrom:" + x);
-        console.log("stepto:" + this.id);
-    };
+  report.id = cell.id;
+  hlpcls = cell.classList;
+  if (hlpcls.contains('white')) {
+      report.color = 'white';
+  } else if (hlpcls.contains('black')) {
+      report.color = 'black';
+  }
+  if (hlpcls.contains('king')) {
+      report.content = 'king';
+  } else if (hlpcls.contains('queen')) {
+      report.content = 'queen';
+  } else if (hlpcls.contains('rook')) {
+      report.content = 'rook';
+  } else if (hlpcls.contains('bishop')) {
+      report.content = 'bishop';
+  } else if (hlpcls.contains('knight')) {
+      report.content = 'knight';
+  } else if (hlpcls.contains('pawn')) {
+      report.content = 'pawn';
+  }
+  return report;
+}
+function markStep(e) {
+  let trg = $(e.target);
+  let report = {
+      stepfrom: null,
+      stepto: null,
+  }
+  if (trg.hasClass('stepto')) {
+      trg.removeClass('stepto');
+  } else if ($('.stepto').length) {
+      $('.stepto').removeClass('stepto');
+      if (!trg.hasClass('stepfrom')) {
+          $('.stepfrom').removeClass('stepfrom');
+          trg.addClass('stepfrom');
+      }
+  } else if (trg.hasClass('stepfrom')) {
+      trg.removeClass('stepfrom');
+  } else if ($('.stepfrom').length) {
+      trg.addClass('stepto');
+  } else {
+      trg.addClass('stepfrom');
+  }
+  if ($('.stepto').length && $('.stepfrom').length) {
+      report.stepfrom = whoIs($('.stepfrom')[0]);
+      report.stepto = whoIs($('.stepto')[0]);
+      makeStep(report);
+  }
+}
+function makeStep(plan) {
+  if (plan.stepfrom.content && !plan.stepto.content) {
+      $('#' + plan.stepfrom.id).removeClass(plan.stepfrom.color).removeClass(plan.stepfrom.content);
+      $('#' + plan.stepto.id).addClass(plan.stepfrom.color).addClass(plan.stepfrom.content);
+  } else if (plan.stepto.content) {
+      alert('Конечная клетка уже занята - ходить нельзя!');
+  } else if (!plan.stepfrom.content) {
+      alert('Нечем ходить - начальная клетка пуста!');
+  }
+  $('.stepfrom').removeClass('stepfrom');
+  $('.stepto').removeClass('stepto');
 }

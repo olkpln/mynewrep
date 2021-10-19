@@ -1,5 +1,5 @@
 ﻿$(function(){
-    var field = $('#green').getBoundingClientRect();
+    var field = $('#green')[0].getBoundingClientRect();
     var step = 10;
     var borders = {
         left: 0,
@@ -9,7 +9,7 @@
         bottom: field.height,
     }
     $('#red').on('mouseover', function(e){
-        var red = $('red')[0];
+        var red = $('#red')[0];
         var coords = e.target.getBoundingClientRect();
         // вычисляем центр красного блока
         var center = {
@@ -19,8 +19,8 @@
         // сравниваем координаты центра и координаты курсора мыши
         // определяем в каком направлении двигаться
         var delta = {
-            x: Math.sign(center.x - e.x),
-            y: Math.sign(center.y - e.y),
+            x: Math.sign(center.x - e.clientX),
+            y: Math.sign(center.y - e.clientY),
         }
         // определяем положение верхнего левого угла блока относительно его родителя
         var oldplace = {
